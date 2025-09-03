@@ -1,7 +1,29 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_start_kit/common/constant.dart';
+import 'package:flutter_start_kit/data/remote/weather_remote_data_source.dart';
+import 'package:flutter_start_kit/data/repository/dashboard_repository_impl.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final dio = Dio(BaseOptions(baseUrl: ApiConstants.baseUrl));
+  final remote = WeatherRemoteDataSourceImpl(dio);
+  final repo = DashboardRepositoryImpl(remote: remote);
+
+  final result = await repo.fetchCurrentWeather("Tokyo");
+  print("City: ${result.city} Temp: ${result.temperatureC}°C");
+
+  final highs = await repo.fetchFiveDayHighs("Tokyo");
+  print("Highs: ${highs.highsC}");
+
+  final rain = await repo.fetchFiveDayRain("Tokyo");
+  print("Rain: ${rain.rainMm}");
+
+  final share = await repo.fetchConditionShare("Tokyo");
+  print("Conditions: ${share.labels} -> ${share.values}");
+  //runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
