@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'forecast_dto.g.dart';
 
+/// The classes represent data transfer objects (DTOs) for forecasting weather information in Dart,
+/// including forecast data, forecast items, main weather details, and weather descriptions.
 @JsonSerializable()
 class ForecastDTO {
   final List<ForecastItemDTO> list;

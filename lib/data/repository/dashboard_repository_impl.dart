@@ -9,6 +9,8 @@ import '../../domain/repository/dashboard_repository.dart';
 
 import '../remote/weather_remote_data_source.dart';
 
+/// The `DashboardRepositoryImpl` class implements methods to fetch current weather, five-day highs,
+/// five-day rain, and condition share data for a given city using a remote data source.
 class DashboardRepositoryImpl implements DashboardRepository {
   final WeatherRemoteDataSource remote;
 
@@ -31,6 +33,8 @@ class DashboardRepositoryImpl implements DashboardRepository {
   }
 
 
+  /// The function fetches the five-day high temperatures for a given city from a remote data source and
+  /// returns the data in a structured entity.
   @override
   Future<FiveDayHighsEntity> fetchFiveDayHighs(String city) async {
     final fc = await remote.getFiveDayForecast(city);
@@ -58,6 +62,8 @@ class DashboardRepositoryImpl implements DashboardRepository {
   }
 
   
+  /// This Dart function fetches the five-day rain forecast for a specified city and calculates the
+  /// total rainfall for each day.
   @override
   Future<FiveDayRainEntity> fetchFiveDayRain(String city) async {
     final fc = await remote.getFiveDayForecast(city);
@@ -86,6 +92,9 @@ class DashboardRepositoryImpl implements DashboardRepository {
   }
 
 
+  /// The fetchConditionShare function retrieves a five-day forecast for a given city and calculates the
+  /// distribution of weather conditions, while the fetchCurrentWeatherSafe function fetches the current
+  /// weather data for a city and handles any potential errors.
   @override
   Future<ConditionShareEntity> fetchConditionShare(String city) async {
     final fc = await remote.getFiveDayForecast(city);

@@ -1,3 +1,5 @@
+/// The WeatherEntity class represents weather data for a specific city including temperature, humidity,
+/// condition, and description.
 class WeatherEntity {
   final String city;
   final double temperatureC;

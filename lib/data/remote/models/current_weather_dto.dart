@@ -1,6 +1,8 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'current_weather_dto.g.dart';
 
+/// The below Dart classes are used for serializing and deserializing JSON data related to current
+/// weather information.
 @JsonSerializable()
 class CurrentWeatherDTO {
   final String name;

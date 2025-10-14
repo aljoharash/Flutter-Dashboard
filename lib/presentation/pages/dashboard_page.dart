@@ -13,6 +13,11 @@ import '../bloc/dashboard_event.dart';
 import '../bloc/dashboard_state.dart';
 
 
+/// The `DashboardPage` class in Dart represents a stateful widget for displaying city information with
+/// a predefined list of cities.
+/// The `DashboardPage` class in Dart represents a page displaying weather dashboard statistics and
+/// charts for different cities, with functions to fetch data, calculate averages, and determine maximum
+/// values.
 class DashboardPage extends StatefulWidget {
   const DashboardPage({Key? key}) : super(key: key);
 
@@ -36,6 +41,8 @@ class _DashboardPageState extends State<DashboardPage> {
     super.dispose();
   }
 
+/// The `_fetchAll` function in Dart reads data from a `DashboardBloc` for a specified city and triggers
+/// multiple events related to fetching different types of weather data for that city.
   void _fetchAll(String city) {
     final b = context.read<DashboardBloc>();
     b
@@ -45,14 +52,32 @@ class _DashboardPageState extends State<DashboardPage> {
       ..add(ConditionShareRequested(city));
   }
 
+/// The `_onApply` function triggers a refresh of the CitiesList highlight and fetches data based on the
+/// trimmed text from a text controller.
   void _onApply() {
     setState(() {}); // refresh CitiesList highlight
     _fetchAll(_cityCtrl.text.trim());
   }
 
+/// The `_avg` function calculates the average of a list of double values.
+/// 
+/// Args:
+///   values (List<double>): The `values` parameter is a list of double values for which the average
+/// needs to be calculated. If the list is empty, the function returns 0.0. Otherwise, it calculates the
+/// average by summing up all the values in the list and dividing by the number of values in the list
   double _avg(List<double> values) =>
       values.isEmpty ? 0.0 : values.reduce((a, b) => a + b) / values.length;
 
+
+/// The `_maxIndex` function returns the index of the maximum value in a list of doubles.
+/// 
+/// Args:
+///   values (List<double>): The `_maxIndex` function you provided takes a list of double values as
+/// input and returns the index of the maximum value in the list.
+/// 
+/// Returns:
+///   The function `_maxIndex` returns the index of the maximum value in the input list of doubles. If
+/// the input list is empty, it returns -1.
   int _maxIndex(List<double> values) {
     if (values.isEmpty) return -1;
     double maxVal = values.first;
